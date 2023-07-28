@@ -1,9 +1,9 @@
-import Button from "@mui/material/Button";
+import { ArticleTitleAssistantForm } from "@/components/ArticleTitleAssistantForm";
 
 export default function Home() {
   return (
     <main>
-      <Button variant="contained">Contained</Button>
+      <ArticleTitleAssistantForm />
     </main>
   );
 }
