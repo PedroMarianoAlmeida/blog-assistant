@@ -14,7 +14,21 @@ interface SeoResponseDataProps {
 }
 
 export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
-  const { loading, imageUrl, hashtags } = seoResponseData;
+  const { loading, imageUrl, hashtags, error } = seoResponseData;
+
+  if (error)
+    return (
+      <Box
+        component="section"
+        display="flex"
+        justifyContent="center"
+        gap={2}
+      >
+        <Typography variant="subtitle1" gutterBottom>
+          Something went wrong, try again later
+        </Typography>
+      </Box>
+    );
 
   const shouldRender = loading || imageUrl !== "" || hashtags.length > 0;
   if (!shouldRender) return null;

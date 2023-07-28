@@ -59,7 +59,7 @@ export const generateSEO = async (
     return {
       imageUrl: "",
       hashtags: [],
-      error: false,
+      error: true,
     };
   }
 };
