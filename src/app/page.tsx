@@ -11,6 +11,7 @@ export default function Home() {
     loading: false,
     imageUrl: "",
     hashtags: [],
+    error: false,
   });
 
   return (

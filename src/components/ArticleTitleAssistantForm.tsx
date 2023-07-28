@@ -21,17 +21,26 @@ export const ArticleTitleAssistantForm = ({
   setSeoResponseData,
 }: ArticleTitleAssistantFormProps) => {
   const [title, setTitle] = useState("");
-  const [imageResolution, setImageResolution] = useState<CreateImageRequestSizeEnum>("256x256");
+  const [imageResolution, setImageResolution] =
+    useState<CreateImageRequestSizeEnum>("256x256");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSeoResponseData({ loading: true, imageUrl: "", hashtags: [] });
-    const { imageUrl, hashtags } = await generateSEO(title, imageResolution);
-    setSeoResponseData({ loading: false, imageUrl, hashtags });
+    setSeoResponseData({
+      loading: true,
+      imageUrl: "",
+      hashtags: [],
+      error: false,
+    });
+    const { imageUrl, hashtags, error } = await generateSEO(
+      title,
+      imageResolution
+    );
+    setSeoResponseData({ loading: false, imageUrl, hashtags, error });
   };
 
   const handleResolutionChange = (event: SelectChangeEvent) => {
-    setImageResolution(event.target.value as CreateImageRequestSizeEnum );
+    setImageResolution(event.target.value as CreateImageRequestSizeEnum);
   };
 
   return (

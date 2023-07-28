@@ -45,12 +45,21 @@ export const generateSEO = async (
   title: string,
   imageResolution: CreateImageRequestSizeEnum
 ) => {
-  const [imageUrl, hashtags] = await Promise.all([
-    await generateImage(title, imageResolution),
-    await generateHashtags(title),
-  ]);
-  return {
-    imageUrl,
-    hashtags,
-  };
+  try {
+    const [imageUrl, hashtags] = await Promise.all([
+      await generateImage(title, imageResolution),
+      await generateHashtags(title),
+    ]);
+    return {
+      imageUrl,
+      hashtags,
+      error: false,
+    };
+  } catch (e) {
+    return {
+      imageUrl: "",
+      hashtags: [],
+      error: false,
+    };
+  }
 };
