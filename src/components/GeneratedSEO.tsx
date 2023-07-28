@@ -15,6 +15,9 @@ interface SeoResponseDataProps {
 export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
   const { loading, imageUrl, hashtags } = seoResponseData;
 
+  const shouldRender = loading || imageUrl !== "" || hashtags.length > 0;
+  if (!shouldRender) return null;
+
   return (
     <section>
       <Typography variant="subtitle1" gutterBottom>
