@@ -46,11 +46,12 @@ export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
           Hashtags:
         </Typography>
         {loading
-          ? [1, 2, 3].map(() => (
+          ? [1, 2, 3].map((key) => (
               <Skeleton
                 variant="rounded"
                 width={Math.random() * 40 + 50}
                 height={30}
+                key={key}
               />
             ))
           : hashtags.map((hashtag) => <Chip label={hashtag} key={hashtag} />)}
