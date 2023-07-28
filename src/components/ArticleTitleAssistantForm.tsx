@@ -4,12 +4,15 @@ import { useState, FormEvent } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
+import { generateSEO } from "@/services/openAi";
+
 export const ArticleTitleAssistantForm = () => {
   const [title, setTitle] = useState("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(title);
+    generateSEO();
   };
 
   return (
