@@ -35,12 +35,12 @@ const generateHashtags = async (title: string) => {
   const rawTextAnswer = response.data.choices[0].message.content as string;
   const hashtags = rawTextAnswer.split(" ");
 
-  console.log({ hashtags });
+  return hashtags
 };
 
 export const generateSEO = async (title: string) => {
   //const imageUrl = await generateImage(title);
   const imageUrl = "Temporary - not run out my credits =S";
-  const hastags = await generateHashtags(title);
-  return { imageUrl };
+  const hashtags = await generateHashtags(title);
+  return { imageUrl, hashtags };
 };

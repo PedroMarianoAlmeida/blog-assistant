@@ -18,9 +18,9 @@ export const ArticleTitleAssistantForm = ({
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSeoResponseData({ loading: true, imageUrl: "" });
-    const { imageUrl } = await generateSEO(title);
-    setSeoResponseData({ loading: false, imageUrl });
+    setSeoResponseData({ loading: true, imageUrl: "", hashtags: [] });
+    const { imageUrl, hashtags } = await generateSEO(title);
+    setSeoResponseData({ loading: false, imageUrl, hashtags });
   };
 
   return (
