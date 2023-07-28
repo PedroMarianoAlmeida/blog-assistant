@@ -39,7 +39,7 @@ export const ArticleTitleAssistantForm = ({
         required
         id="outlined-required"
         label="Article Title"
-        placeholder="How to be hanked in first page on Google"
+        placeholder="How to be ranked in first page on Google"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
