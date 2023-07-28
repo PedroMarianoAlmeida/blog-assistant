@@ -8,7 +8,7 @@ import { generateSEO } from "@/services/openAi";
 import { SeoResponseData } from "@/types/openAiResponse";
 
 export interface ArticleTitleAssistantFormProps {
-  setSeoResponseData: (data: SeoResponseData | null) => void;
+  setSeoResponseData: (data: SeoResponseData) => void;
 }
 
 export const ArticleTitleAssistantForm = ({
