@@ -15,11 +15,11 @@ const generateImage = async (title: string) => {
     size: "1024x1024",
   });
 
-  const imageUrl = response.data.data[0].url;
-
-  console.log({ imageUrl });
+  const imageUrl = response.data.data[0].url as string;
+  return imageUrl
 };
 
 export const generateSEO = async (title: string) => {
-  await generateImage(title);
+  const imageUrl = await generateImage(title);
+  return { imageUrl };
 };

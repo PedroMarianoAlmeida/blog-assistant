@@ -5,13 +5,22 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 
 import { generateSEO } from "@/services/openAi";
+import { SeoResponseData } from "@/types/openAiResponse";
 
-export const ArticleTitleAssistantForm = () => {
+export interface ArticleTitleAssistantFormProps {
+  setSeoResponseData: (data: SeoResponseData | null) => void;
+}
+
+export const ArticleTitleAssistantForm = ({
+  setSeoResponseData,
+}: ArticleTitleAssistantFormProps) => {
   const [title, setTitle] = useState("");
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    generateSEO(title);
+    setSeoResponseData({ loading: true, imageUrl: "" });
+    const { imageUrl } = await generateSEO(title);
+    setSeoResponseData({ loading: false, imageUrl });
   };
 
   return (
