@@ -8,12 +8,10 @@ import { GeneratedSEO } from "@/components/GeneratedSEO";
 
 export default function Home() {
   const [seoResponseData, setSeoResponseData] = useState<SeoResponseData>({
-    loading: false,
+    loading: true,
     imageUrl: "",
     hashtags: [],
   });
-
-  console.log(seoResponseData);
 
   return (
     <main>
