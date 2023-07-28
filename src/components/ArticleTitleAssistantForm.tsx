@@ -11,6 +11,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { generateSEO } from "@/services/openAi";
 import { SeoResponseData } from "@/types/openAiResponse";
+import { CreateImageRequestSizeEnum } from "openai";
 
 export interface ArticleTitleAssistantFormProps {
   setSeoResponseData: (data: SeoResponseData) => void;
@@ -20,19 +21,17 @@ export const ArticleTitleAssistantForm = ({
   setSeoResponseData,
 }: ArticleTitleAssistantFormProps) => {
   const [title, setTitle] = useState("");
-  const [imageResolution, setImageResolution] = useState("256x256");
-
-  console.log({ imageResolution });
+  const [imageResolution, setImageResolution] = useState<CreateImageRequestSizeEnum>("256x256");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSeoResponseData({ loading: true, imageUrl: "", hashtags: [] });
-    const { imageUrl, hashtags } = await generateSEO(title);
+    const { imageUrl, hashtags } = await generateSEO(title, imageResolution);
     setSeoResponseData({ loading: false, imageUrl, hashtags });
   };
 
   const handleResolutionChange = (event: SelectChangeEvent) => {
-    setImageResolution(event.target.value as string);
+    setImageResolution(event.target.value as CreateImageRequestSizeEnum );
   };
 
   return (
