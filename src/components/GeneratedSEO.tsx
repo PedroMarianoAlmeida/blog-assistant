@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Box from "@mui/material/Box";
 
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
@@ -19,7 +20,13 @@ export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
   if (!shouldRender) return null;
 
   return (
-    <section>
+    <Box
+      component="section"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      gap={2}
+    >
       <Typography variant="subtitle1" gutterBottom>
         Image
       </Typography>
@@ -34,19 +41,20 @@ export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
           alt="AI Generated Image"
         />
       )}
-
-      <Typography variant="subtitle1" gutterBottom>
-        Hashtags
-      </Typography>
-      {loading
-        ? [1, 2, 3].map(() => (
-            <Skeleton
-              variant="rounded"
-              width={Math.random() * 40 + 50}
-              height={30}
-            />
-          ))
-        : hashtags.map((hashtag) => <Chip label={hashtag} key={hashtag} />)}
-    </section>
+      <Box display="flex" flexDirection="row" gap={1}>
+        <Typography variant="subtitle1" gutterBottom>
+          Hashtags:
+        </Typography>
+        {loading
+          ? [1, 2, 3].map(() => (
+              <Skeleton
+                variant="rounded"
+                width={Math.random() * 40 + 50}
+                height={30}
+              />
+            ))
+          : hashtags.map((hashtag) => <Chip label={hashtag} key={hashtag} />)}
+      </Box>
+    </Box>
   );
 };
