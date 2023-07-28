@@ -35,12 +35,13 @@ const generateHashtags = async (title: string) => {
   const rawTextAnswer = response.data.choices[0].message.content as string;
   const hashtags = rawTextAnswer.split(" ");
 
-  return hashtags
+  return hashtags;
 };
 
 export const generateSEO = async (title: string) => {
-  //const imageUrl = await generateImage(title);
-  const imageUrl = "Temporary - not run out my credits =S";
-  const hashtags = await generateHashtags(title);
+  const [imageUrl, hashtags] = await Promise.all([
+    await generateImage(title),
+    await generateHashtags(title),
+  ]);
   return { imageUrl, hashtags };
 };
