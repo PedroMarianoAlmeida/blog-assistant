@@ -3,6 +3,7 @@ import { useState, FormEvent } from "react";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 
 import { generateSEO } from "@/services/openAi";
 import { SeoResponseData } from "@/types/openAiResponse";
@@ -24,7 +25,16 @@ export const ArticleTitleAssistantForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Box
+      component="form"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      onSubmit={handleSubmit}
+      my={3}
+      gap={1}
+      mx={4}
+    >
       <TextField
         required
         id="outlined-required"
@@ -32,10 +42,11 @@ export const ArticleTitleAssistantForm = ({
         placeholder="How to be hanked in first page on Google"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        fullWidth
       />
       <Button type="submit" variant="contained">
-        Contained
+        Create Data
       </Button>
-    </form>
+    </Box>
   );
 };
