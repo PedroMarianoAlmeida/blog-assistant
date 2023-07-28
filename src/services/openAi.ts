@@ -1,6 +1,6 @@
 "use server";
 
-import { Configuration, OpenAIApi, CreateImageRequestSizeEnum } from "openai";
+import { Configuration, OpenAIApi } from "openai";
 
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY,
@@ -8,14 +8,11 @@ const configuration = new Configuration({
 
 const openAi = new OpenAIApi(configuration);
 
-const generateImage = async (
-  title: string,
-  imageResolution: CreateImageRequestSizeEnum
-) => {
+const generateImage = async (title: string) => {
   const response: any = await openAi.createImage({
     prompt: title,
     n: 1,
-    size: imageResolution,
+    size: "1024x1024",
   });
 
   const imageUrl = response.data.data[0].url as string;
@@ -41,12 +38,9 @@ const generateHashtags = async (title: string) => {
   return hashtags;
 };
 
-export const generateSEO = async (
-  title: string,
-  imageResolution: CreateImageRequestSizeEnum
-) => {
+export const generateSEO = async (title: string) => {
   const [imageUrl, hashtags] = await Promise.all([
-    await generateImage(title, imageResolution),
+    await generateImage(title),
     await generateHashtags(title),
   ]);
   return {
