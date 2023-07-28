@@ -19,23 +19,28 @@ const generateImage = async (title: string) => {
   return imageUrl;
 };
 
-const completion = async () => {
+const generateHashtags = async (title: string) => {
   const response: any = await openAi.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [
-      { role: "system", content: "You are a helpful assistant." },
-      { role: "user", content: "Hello world" },
+      {
+        role: "system",
+        content:
+          "You will work as a SEO assistant, providing the best hashtags for my text, please provide only the hashtags without any other text. Each hashtag should have a own # symbol, and separate with a single space",
+      },
+      { role: "user", content: title },
     ],
   });
 
-  const rawTextAnswer = response.data.choices[0].message.content;
+  const rawTextAnswer = response.data.choices[0].message.content as string;
+  const hashtags = rawTextAnswer.split(" ");
 
-  console.log({ rawTextAnswer });
+  console.log({ hashtags });
 };
 
 export const generateSEO = async (title: string) => {
   //const imageUrl = await generateImage(title);
   const imageUrl = "Temporary - not run out my credits =S";
-  const hastags = await completion();
+  const hastags = await generateHashtags(title);
   return { imageUrl };
 };
