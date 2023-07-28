@@ -11,8 +11,7 @@ export const ArticleTitleAssistantForm = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(title);
-    generateSEO();
+    generateSEO(title);
   };
 
   return (

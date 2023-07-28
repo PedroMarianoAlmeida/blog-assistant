@@ -8,16 +8,18 @@ const configuration = new Configuration({
 
 const openAi = new OpenAIApi(configuration);
 
-const generateImage = async () => {
-  const response = await openAi.createImage({
-    prompt: "A cute baby sea otter",
-    n: 2,
+const generateImage = async (title: string) => {
+  const response: any = await openAi.createImage({
+    prompt: title,
+    n: 1,
     size: "1024x1024",
   });
 
-  console.log(response);
+  const imageUrl = response.data.data[0].url;
+
+  console.log({ imageUrl });
 };
 
-export const generateSEO = async () => {
-  generateImage();
+export const generateSEO = async (title: string) => {
+  await generateImage(title);
 };
