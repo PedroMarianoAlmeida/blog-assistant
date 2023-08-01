@@ -2,6 +2,15 @@ import { auth } from "@clerk/nextjs";
 
 import prismadb from "./prismadb";
 
+const checkIfUserUsedToday = (lastUpdate: Date) => {
+  const currentDate = new Date();
+  return (
+    lastUpdate.getFullYear() === currentDate.getFullYear() &&
+    lastUpdate.getMonth() === currentDate.getMonth() &&
+    lastUpdate.getDate() === currentDate.getDate()
+  );
+};
+
 export const increaseApiLimit = async () => {
   const { userId } = auth();
 
@@ -12,9 +21,11 @@ export const increaseApiLimit = async () => {
   });
 
   if (userApiLimit) {
+    const userUsedToday = checkIfUserUsedToday(userApiLimit.updatedAt);
+
     await prismadb.userApiLimit.update({
       where: { userId },
-      data: { count: userApiLimit.count + 1 },
+      data: { count: userUsedToday ? userApiLimit.count + 1 : 0 },
     });
   } else {
     await prismadb.userApiLimit.create({
