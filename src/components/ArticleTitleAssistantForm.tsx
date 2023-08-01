@@ -30,7 +30,7 @@ export const ArticleTitleAssistantForm = ({
       loading: true,
       imageUrl: "",
       hashtags: [],
-      error: false,
+      error: "",
       usage: 0
     });
     const { imageUrl, hashtags, error, usage } = await generateSEO(

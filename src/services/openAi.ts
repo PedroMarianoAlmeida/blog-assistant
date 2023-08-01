@@ -49,7 +49,7 @@ export const generateSEO = async (
 ) => {
   try {
     const usage = await checkApiLimit();
-    if (usage > 3) throw new Error('"Free trial has expired".');
+    if (usage >= 3) throw new Error("Free trial has expired");
 
     const [imageUrl, hashtags] = await Promise.all([
       await generateImage(title, imageResolution),
@@ -64,11 +64,11 @@ export const generateSEO = async (
       error: false,
       usage: usage + 1,
     };
-  } catch (e) {
+  } catch (e: any) {
     return {
       imageUrl: "",
       hashtags: [],
-      error: true,
+      error: e.message,
       usage: 0,
     };
   }

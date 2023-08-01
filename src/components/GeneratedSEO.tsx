@@ -20,7 +20,9 @@ export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
     return (
       <Box component="section" display="flex" justifyContent="center" gap={2}>
         <Typography variant="subtitle1" gutterBottom>
-          Something went wrong, try again later
+          {error === "Free trial has expired"
+            ? "Free trial has expired, try again tomorrow"
+            : "Something went wrong, try again later"}
         </Typography>
       </Box>
     );
