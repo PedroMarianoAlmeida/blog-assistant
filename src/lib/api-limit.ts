@@ -26,11 +26,11 @@ export const increaseApiLimit = async () => {
 export const checkApiLimit = async () => {
   const { userId } = auth();
 
-  if (!userId) return false;
+  if (!userId) return 0;
 
   const userApiLimit = await prismadb.userApiLimit.findUnique({
     where: { userId },
   });
 
-  return !userApiLimit || userApiLimit.count < 3;
+  return userApiLimit ? userApiLimit.count : 0;
 };
