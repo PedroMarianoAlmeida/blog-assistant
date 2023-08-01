@@ -48,6 +48,7 @@ export const generateSEO = async (
   title: string,
   imageResolution: CreateImageRequestSizeEnum
 ) => {
+  console.log("generateSEO");
   try {
     const { userId } = auth();
     if (!userId) throw new Error("Need to login");
