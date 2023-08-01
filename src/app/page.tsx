@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import CallToAction from "@/components/CallToAction";
 
 export default function Home() {
   return (
@@ -40,12 +41,7 @@ export default function Home() {
             spacing={2}
             justifyContent="center"
           >
-            <Link href="/sign-in">
-              <Button variant="contained">Sign In</Button>
-            </Link>
-            <Link href="/sign-up">
-              <Button variant="outlined">Sign Up</Button>
-            </Link>
+            <CallToAction />
           </Stack>
         </Container>
       </Box>
