@@ -1,6 +1,7 @@
 "use server";
 
 import { Configuration, OpenAIApi, CreateImageRequestSizeEnum } from "openai";
+import { auth } from "@clerk/nextjs";
 
 import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
 
@@ -48,6 +49,9 @@ export const generateSEO = async (
   imageResolution: CreateImageRequestSizeEnum
 ) => {
   try {
+    const { userId } = auth();
+    if (!userId) throw new Error("Need to login");
+
     const usage = await checkApiLimit();
     if (usage >= 3) throw new Error("Free trial has expired");
 
