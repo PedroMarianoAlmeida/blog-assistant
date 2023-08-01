@@ -2,6 +2,8 @@
 
 import { Configuration, OpenAIApi, CreateImageRequestSizeEnum } from "openai";
 
+import { checkApiLimit, increaseApiLimit } from "@/lib/api-limit";
+
 const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_KEY,
 });
@@ -46,10 +48,16 @@ export const generateSEO = async (
   imageResolution: CreateImageRequestSizeEnum
 ) => {
   try {
+    const freeTrial = await checkApiLimit();
+    if (!freeTrial) throw new Error('"Free trial has expired".');
+
     const [imageUrl, hashtags] = await Promise.all([
       await generateImage(title, imageResolution),
       await generateHashtags(title),
     ]);
+
+    await increaseApiLimit();
+
     return {
       imageUrl,
       hashtags,
