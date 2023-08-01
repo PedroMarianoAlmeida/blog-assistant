@@ -14,16 +14,11 @@ interface SeoResponseDataProps {
 }
 
 export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
-  const { loading, imageUrl, hashtags, error } = seoResponseData;
+  const { loading, imageUrl, hashtags, error, usage } = seoResponseData;
 
   if (error)
     return (
-      <Box
-        component="section"
-        display="flex"
-        justifyContent="center"
-        gap={2}
-      >
+      <Box component="section" display="flex" justifyContent="center" gap={2}>
         <Typography variant="subtitle1" gutterBottom>
           Something went wrong, try again later
         </Typography>
@@ -69,6 +64,17 @@ export const GeneratedSEO = ({ seoResponseData }: SeoResponseDataProps) => {
               />
             ))
           : hashtags.map((hashtag) => <Chip label={hashtag} key={hashtag} />)}
+      </Box>
+      <Box display="flex" justifyContent="center">
+        <Typography variant="subtitle1" gutterBottom>
+          Usage:{" "}
+        </Typography>
+        {loading ? (
+          <Skeleton variant="rounded" width={15} height={30} />
+        ) : (
+          usage
+        )}
+        <Typography>/3</Typography>
       </Box>
     </Box>
   );

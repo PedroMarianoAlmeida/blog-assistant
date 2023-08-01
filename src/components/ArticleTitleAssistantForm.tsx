@@ -31,12 +31,13 @@ export const ArticleTitleAssistantForm = ({
       imageUrl: "",
       hashtags: [],
       error: false,
+      usage: 0
     });
-    const { imageUrl, hashtags, error } = await generateSEO(
+    const { imageUrl, hashtags, error, usage } = await generateSEO(
       title,
       imageResolution
     );
-    setSeoResponseData({ loading: false, imageUrl, hashtags, error });
+    setSeoResponseData({ loading: false, imageUrl, hashtags, error, usage });
   };
 
   const handleResolutionChange = (event: SelectChangeEvent) => {

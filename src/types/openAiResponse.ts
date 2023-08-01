@@ -3,4 +3,5 @@ export interface SeoResponseData {
   imageUrl: string;
   hashtags: string[];
   error: boolean;
+  usage: number;
 }

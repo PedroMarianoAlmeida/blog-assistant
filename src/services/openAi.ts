@@ -62,12 +62,14 @@ export const generateSEO = async (
       imageUrl,
       hashtags,
       error: false,
+      usage: usage + 1,
     };
   } catch (e) {
     return {
       imageUrl: "",
       hashtags: [],
       error: true,
+      usage: 0,
     };
   }
 };
